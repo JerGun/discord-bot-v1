@@ -5,7 +5,7 @@ const { Client, Intents } = require("discord.js");
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
-const keepAlive = require('./server')
+const keepAlive = require("./server");
 
 function getLumi() {
   return axios
@@ -14,6 +14,14 @@ function getLumi() {
     )
     .then((res) => {
       return res.data["priceUSD"];
+    });
+}
+
+function getKUB() {
+  return axios
+    .get("https://www.bitkub.com/api/market/information?currency=KUB")
+    .then((res) => {
+      return res.data["data"]["last"]["thb"];
     });
 }
 
@@ -40,11 +48,19 @@ client.on("message", (msg) => {
   if (msg.content === "$lumi") {
     getTHB().then((thb) => {
       getLumi().then((lumi) =>
-        msg.channel.send(`1 LUMI: ${String(lumi.toFixed(6))} USD ≈ ${String((lumi * thb).toFixed(2))} THB`)
+        msg.channel.send(
+          `1 LUMI: ${String(lumi.toFixed(6))} USD ≈ ${String(
+            (lumi * thb).toFixed(2)
+          )} THB`
+        )
       );
     });
   }
+
+  if (msg.content === "$kub") {
+    getKUB().then((kub) => msg.channel.send(`1 KUB: ${kub}THB`));
+  }
 });
 
-keepAlive()
+keepAlive();
 client.login(process.env.TOKEN);

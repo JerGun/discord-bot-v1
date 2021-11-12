@@ -1,13 +1,12 @@
 const express = require("express");
+const app = express();
 
-const server = express();
-
-server.all("/", (req, res) => {
+app.all("/", (req, res) => {
   res.send("Bot is running!");
 });
 
 function keepAlive() {
-  server.listen(process.env.PORT || 3000, () => {
+  app.listen(process.env.PORT || 3000, () => {
     console.log("Server is ready.");
   });
 }
