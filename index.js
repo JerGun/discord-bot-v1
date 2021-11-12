@@ -49,16 +49,15 @@ client.on("message", (msg) => {
     getTHB().then((thb) => {
       getLumi().then((lumi) =>
         msg.channel.send(
-          `1 LUMI: ${String(lumi.toFixed(6))} USD ≈ ${String(
-            (lumi * thb).toFixed(2)
-          )} THB`
+          `USD/LUMI: ${String(lumi.toFixed(6))} USD \n
+          THB/LUMI ${String((lumi * thb).toFixed(2))} THB`
         )
       );
     });
   }
 
   if (msg.content === "$kub") {
-    getKUB().then((kub) => msg.channel.send(`1 KUB: ${kub}THB`));
+    getKUB().then((kub) => msg.channel.send(`THB/KUB: ${kub} THB`));
   }
 });
 
