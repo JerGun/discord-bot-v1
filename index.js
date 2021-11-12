@@ -49,7 +49,7 @@ client.on("message", (msg) => {
     getTHB().then((thb) => {
       getLumi().then((lumi) =>
         msg.channel.send(
-          `USD/LUMI : ${String(lumi.toFixed(6))} USD \n THB/LUMI : ${String((lumi * thb).toFixed(2))} THB`
+          `USD/LUMI : ${String(lumi.toFixed(6))} USD\nTHB/LUMI : ${String((lumi * thb).toFixed(2))} THB`
         )
       );
     });
