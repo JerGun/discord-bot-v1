@@ -12,6 +12,7 @@ const client = new Client({
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setActivity("Visual Studio Code", { type: "PLAYING" }).catch(console.error);
 });
 
 client.on("message", (msg) => {
@@ -90,6 +91,12 @@ client.on("message", (msg) => {
         )
       );
   }
+
+  if (msg.mentions.users.first().id === "304114263927029760")
+    return msg.channel.send(`${msg.mentions.members.first()} ผู้กล้าขี้ระแวง`);
+
+  if (msg.mentions.users.first().id === "426748155900461076")
+    return msg.channel.send(`${msg.mentions.members.first()} ผู้กล้าขี้ระแวง`);
 });
 
 keepAlive();
