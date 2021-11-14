@@ -39,7 +39,7 @@ client.on("message", (msg) => {
 
   if (msg.mentions.members.size) {
     if (msg.mentions.users.first().id === "908733995326533652")
-      return msg.channel.send(`${msg.mentions.members.first()} เรียกทำควยไร`);
+      return msg.channel.send(`เรียกทำควยไร`);
 
     if (msg.mentions.users.first().id === "266578949104992257")
       return msg.channel.send(`${msg.mentions.members.first()} พั้นช์ของโอ้น`);
