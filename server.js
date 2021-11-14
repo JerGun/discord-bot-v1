@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 app.all("/", (req, res) => {
-  res.send("Bot is running!");
+  res.send("JerGun Bot | Cryptocurrency Price Bot is running!");
 });
 
 function keepAlive() {
