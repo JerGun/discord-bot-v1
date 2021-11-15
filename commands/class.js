@@ -7,7 +7,8 @@ module.exports = {
     .setDescription("Show today's class")
     .addStringOption((option) =>
       option.setName("day").setDescription("Day of the Week or Tomorrow")
-    ),
+    )
+    .setTimestamp(),
   async execute(interaction) {
     let today = new Date().getDay();
     let embed;
