@@ -15,49 +15,48 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user
     .setActivity("Visual Studio Code", { type: "PLAYING" })
-    .catch(console.error);
+
 });
 
-client.on("message", (msg) => {
+client.on("messageCreate", (msg) => {
   if (msg.author.bot) return;
 
   // if (msg.content === "$help") {
-  //   const embed = new Discord.MessageEmbed().setColor("RANDOM");
-  //   msg.reply({
-  //     content: embed.setDescription(
-  //       "**$help** - Display the help menu\n\n\
-  //     ***Cryptocurrency Price***\n\
-  //     **$btc** - Bitcoin Price\n\
-  //     **$eth** - Ethereum Price\n\
-  //     **$bnb** - Binance Coin Price\n\
-  //     **$kub** - Bitkub Coin Price\n\
-  //     **$ccar** - CryptoCars Price\n\
-  //     **$lumi** - LUMI Price"
-  //     ),
-  //     ephemeral: true,
-  //   });
-  // msg.channel.send();
+  //   const embed = new Discord.MessageEmbed().setColor("RANDOM").setDescription(
+  //     "**$help** - Display the help menu\n\n\
+  //   ***Cryptocurrency Price***\n\
+  //   **$btc** - Bitcoin Price\n\
+  //   **$eth** - Ethereum Price\n\
+  //   **$bnb** - Binance Coin Price\n\
+  //   **$kub** - Bitkub Coin Price\n\
+  //   **$ccar** - CryptoCars Price\n\
+  //   **$lumi** - LUMI Price"
+  //   )
+  //   return msg.reply({
+  //     content: embed,
+  //     ephemeral: true}
+  //   );
   // }
 
   if (msg.mentions.members.size) {
     if (msg.mentions.users.first().id === "908733995326533652")
-      msg.reply(`เรียกทำควยไร`);
+      return msg.reply(`เรียกทำควยไร`);
 
     if (msg.mentions.users.first().id === "266578949104992257")
-      return msg.channel.send(`${msg.mentions.members.first()} พั้นช์ของโอ้น`);
+      return msg.reply(`${msg.mentions.members.first()} พั้นช์ของโอ้น`);
 
     if (msg.mentions.users.first().id === "426748155900461076")
-      return msg.channel.send(
+      return msg.reply(
         `${msg.mentions.members.first()} เบนซีผู้กล้าขี้ระแวง`
       );
 
     if (msg.mentions.users.first().id === "304114263927029760")
-      return msg.channel.send(
+      return msg.reply(
         `${msg.mentions.members.first()} พี่ก้องของน้องแอ๋ว`
       );
 
     if (msg.mentions.users.first().id === "603230504703229962")
-      return msg.channel.send(`${msg.mentions.members.first()} วันๆหาแต่หี`);
+      return msg.reply(`${msg.mentions.members.first()} วันๆหาแต่หี`);
   }
   if (msg.content === "1") msg.reply(`เรียกทำควยไร`);
 
@@ -65,7 +64,7 @@ client.on("message", (msg) => {
     cryptoPrice
       .getBTC()
       .then((price) =>
-        msg.channel.send(
+        msg.reply(
           `USD/BTC : ${separator(price[0], ",", "")} USD\nTHB/BTC : ${separator(
             price[1],
             ",",
@@ -79,7 +78,7 @@ client.on("message", (msg) => {
     cryptoPrice
       .getETH()
       .then((price) =>
-        msg.channel.send(
+        msg.reply(
           `USD/ETH : ${separator(price[0], ",", "")} USD\nTHB/ETH : ${separator(
             price[1],
             ",",
@@ -93,7 +92,7 @@ client.on("message", (msg) => {
     cryptoPrice
       .getBNB()
       .then((price) =>
-        msg.channel.send(
+        msg.reply(
           `USD/BNB : ${separator(price[0], ",", "")} USD\nTHB/BNB : ${separator(
             price[1],
             ",",
@@ -106,14 +105,14 @@ client.on("message", (msg) => {
   if (msg.content === "$kub") {
     cryptoPrice
       .getKUB()
-      .then((kub) => msg.channel.send(`THB/KUB : ${kub} THB`));
+      .then((kub) => msg.reply(`THB/KUB : ${kub} THB`));
   }
 
   if (msg.content === "$ccar") {
     cryptoPrice
       .getCCAR()
       .then((price) =>
-        msg.channel.send(
+        msg.reply(
           `USD/CCAR : ${separator(
             price[0],
             ",",
@@ -127,7 +126,7 @@ client.on("message", (msg) => {
     cryptoPrice
       .getLUMI()
       .then((price) =>
-        msg.channel.send(
+        msg.reply(
           `USD/LUMI : ${price[0].toFixed(6)} USD\nTHB/LUMI : ${price[1].toFixed(
             2
           )} THB`
