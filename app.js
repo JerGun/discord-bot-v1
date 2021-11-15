@@ -21,25 +21,27 @@ client.on("ready", () => {
 client.on("message", (msg) => {
   if (msg.author.bot) return;
 
-  if (msg.content === "$help") {
-    const embed = new Discord.MessageEmbed().setColor("RANDOM");
-    msg.channel.send(
-      embed.setDescription(
-        "**$help** - Display the help menu\n\n\
-        ***Cryptocurrency Price***\n\
-        **$btc** - Bitcoin Price\n\
-        **$eth** - Ethereum Price\n\
-        **$bnb** - Binance Coin Price\n\
-        **$kub** - Bitkub Coin Price\n\
-        **$ccar** - CryptoCars Price\n\
-        **$lumi** - LUMI Price"
-      )
-    );
-  }
+  // if (msg.content === "$help") {
+  //   const embed = new Discord.MessageEmbed().setColor("RANDOM");
+  //   msg.reply({
+  //     content: embed.setDescription(
+  //       "**$help** - Display the help menu\n\n\
+  //     ***Cryptocurrency Price***\n\
+  //     **$btc** - Bitcoin Price\n\
+  //     **$eth** - Ethereum Price\n\
+  //     **$bnb** - Binance Coin Price\n\
+  //     **$kub** - Bitkub Coin Price\n\
+  //     **$ccar** - CryptoCars Price\n\
+  //     **$lumi** - LUMI Price"
+  //     ),
+  //     ephemeral: true,
+  //   });
+    // msg.channel.send();
+  // }
 
   if (msg.mentions.members.size) {
     if (msg.mentions.users.first().id === "908733995326533652")
-      return msg.channel.send(`เรียกทำควยไร`);
+      return msg.reply(`เรียกทำควยไร`);
 
     if (msg.mentions.users.first().id === "266578949104992257")
       return msg.channel.send(`${msg.mentions.members.first()} พั้นช์ของโอ้น`);
