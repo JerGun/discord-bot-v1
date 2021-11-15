@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("help1")
+    .setName("help")
     .setDescription("Display the help menu"),
   async execute(interaction) {
     const embed = new MessageEmbed()
