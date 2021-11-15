@@ -35,7 +35,7 @@ client.once("ready", () => {
   (async () => {
     try {
       if (process.env.ENV === "production") {
-        await rest.put(Routes.applicationCommand(CLIENT_ID), {
+        await rest.put(Routes.applicationCommands(CLIENT_ID), {
           body: commands,
         });
         console.log("Successfully registered commands globally");
