@@ -1,10 +1,14 @@
-# Crypto Price Bot
-Discord bot that info real time Cryptocurrency price 
+# Discord Bot
+A Discord bot that build for fun and meet the needs of the builder
 
-## Currently supported currencies
-- BTC
-- ETH
-- BNB
-- KUB
-- CCAR
-- LUMI
+## Commands
+### General
+- /help - Display the help menu
+- /class <day> - Show today's class or class on <su, mo, tu, we, th, fr, sa, tomorrow>
+### Cryptocurrency Price
+- /btc - Bitcoin Price
+- /eth - Ethereum Price
+- /bnb - Binance Coin Price
+- /kub - Bitkub Coin Price
+- /ccar - CryptoCars Price
+- /lumi - LUMI Price
