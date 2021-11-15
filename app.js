@@ -18,7 +18,7 @@ client.on("ready", () => {
     .catch(console.error);
 });
 
-client.on("message", (msg) => {
+client.on("messageCreate", (msg) => {
   if (msg.author.bot) return;
 
   // if (msg.content === "$help") {
@@ -36,12 +36,12 @@ client.on("message", (msg) => {
   //     ),
   //     ephemeral: true,
   //   });
-    // msg.channel.send();
+  // msg.channel.send();
   // }
 
   if (msg.mentions.members.size) {
     if (msg.mentions.users.first().id === "908733995326533652")
-      return msg.reply(`เรียกทำควยไร`);
+      msg.reply(`เรียกทำควยไร`);
 
     if (msg.mentions.users.first().id === "266578949104992257")
       return msg.channel.send(`${msg.mentions.members.first()} พั้นช์ของโอ้น`);
@@ -59,7 +59,8 @@ client.on("message", (msg) => {
     if (msg.mentions.users.first().id === "603230504703229962")
       return msg.channel.send(`${msg.mentions.members.first()} วันๆหาแต่หี`);
   }
-
+  if (msg.content === "1") msg.reply(`เรียกทำควยไร`);
+  
   if (msg.content === "$btc") {
     cryptoPrice
       .getBTC()
