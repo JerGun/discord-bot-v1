@@ -7,8 +7,7 @@ module.exports = {
     .setDescription("Show today's class")
     .addStringOption((option) =>
       option.setName("day").setDescription("Day of the Week or Tomorrow")
-    )
-    .setTimestamp(),
+    ),
   async execute(interaction) {
     let today = new Date().getDay();
     let embed;
@@ -19,7 +18,8 @@ module.exports = {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Sunday Class!")
-        .setDescription("No class today");
+        .setDescription("No class today")
+        .setTimestamp();
     }
     if (today === 1 || interaction.options.getString("day") === "mo") {
       embed = new MessageEmbed()
@@ -28,7 +28,8 @@ module.exports = {
         .addField(
           "225351[2] Computer and Network Security",
           "⏲️ 15.00 - 17.00\n🧑‍🏫 ดร.ธนภณ ถิรดาธนภัทรเดชา"
-        );
+        )
+        .setTimestamp();
     }
     if (today === 2 || interaction.options.getString("day") === "tu") {
       embed = new MessageEmbed()
@@ -48,7 +49,8 @@ module.exports = {
             value:
               "⏲️ 15.00 - 17.00\n🧑‍🏫 นายเชาวน์ ปอแก้ว\n🧑‍🏫 นายณัฐพล หาญสมุทร\n🧑‍🏫 ผศ.ดร.ธีระยุทธ ทองเครือ\n🧑‍🏫 ผศ.ดร.บวรศักดิ์ ศรีสังสิทธิสันติ\n🧑‍🏫 ผศ.ดวิษ แสนโภชน์",
           }
-        );
+        )
+        .setTimestamp();
     }
     if (today === 3 || interaction.options.getString("day") === "we") {
       embed = new MessageEmbed()
@@ -57,7 +59,8 @@ module.exports = {
         .addField(
           "227481[2] Software Quality and Measurement",
           "⏲️ 13.00 - 16.00\n🧑‍🏫 นายณัฐพล หาญสมุทร"
-        );
+        )
+        .setTimestamp();
     }
     if (today === 4 || interaction.options.getString("day") === "th") {
       embed = new MessageEmbed()
@@ -69,19 +72,22 @@ module.exports = {
           name: "227321[2] Software Engineering Project I",
           value:
             "⏲️ 16.00 - 19.00\n\n🧑‍🏫 นายเชาวน์ ปอแก้ว\n🧑‍🏫 นายณัฐพล หาญสมุทร\n🧑‍🏫 ผศ.ดร.ธีระยุทธ ทองเครือ\n🧑‍🏫 ผศ.ดร.บวรศักดิ์ ศรีสังสิทธิสันติ\n🧑‍🏫 ผศ.ดวิษ แสนโภชน์",
-        });
+        })
+        .setTimestamp();
     }
     if (today === 5 || interaction.options.getString("day") === "fr") {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Friday Class!")
-        .setDescription("No class today");
+        .setDescription("No class today")
+        .setTimestamp();
     }
     if (today === 6 || interaction.options.getString("day") === "sa") {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Sunday Class!")
-        .setDescription("No class today");
+        .setDescription("No class today")
+        .setTimestamp();
     }
     await interaction.reply({ embeds: [embed], ephemeral: true });
   },
