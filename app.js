@@ -8,14 +8,12 @@ const keepAlive = require("./server");
 const cryptoPrice = require("./services/fetch");
 
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+  intents: [Intents.FLAGS.GUILDS],
 });
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  client.user
-    .setActivity("Visual Studio Code", { type: "PLAYING" })
-
+  client.user.setActivity("Visual Studio Code", { type: "PLAYING" });
 });
 
 client.on("messageCreate", (msg) => {
@@ -46,14 +44,10 @@ client.on("messageCreate", (msg) => {
       return msg.reply(`${msg.mentions.members.first()} พั้นช์ของโอ้น`);
 
     if (msg.mentions.users.first().id === "426748155900461076")
-      return msg.reply(
-        `${msg.mentions.members.first()} เบนซีผู้กล้าขี้ระแวง`
-      );
+      return msg.reply(`${msg.mentions.members.first()} เบนซีผู้กล้าขี้ระแวง`);
 
     if (msg.mentions.users.first().id === "304114263927029760")
-      return msg.reply(
-        `${msg.mentions.members.first()} พี่ก้องของน้องแอ๋ว`
-      );
+      return msg.reply(`${msg.mentions.members.first()} พี่ก้องของน้องแอ๋ว`);
 
     if (msg.mentions.users.first().id === "603230504703229962")
       return msg.reply(`${msg.mentions.members.first()} วันๆหาแต่หี`);
@@ -103,9 +97,7 @@ client.on("messageCreate", (msg) => {
   }
 
   if (msg.content === "$kub") {
-    cryptoPrice
-      .getKUB()
-      .then((kub) => msg.reply(`THB/KUB : ${kub} THB`));
+    cryptoPrice.getKUB().then((kub) => msg.reply(`THB/KUB : ${kub} THB`));
   }
 
   if (msg.content === "$ccar") {
