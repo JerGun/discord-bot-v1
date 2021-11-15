@@ -18,7 +18,7 @@ client.on("ready", () => {
     .catch(console.error);
 });
 
-client.on("messageCreate", (msg) => {
+client.on("message", (msg) => {
   if (msg.author.bot) return;
 
   // if (msg.content === "$help") {
@@ -60,7 +60,7 @@ client.on("messageCreate", (msg) => {
       return msg.channel.send(`${msg.mentions.members.first()} วันๆหาแต่หี`);
   }
   if (msg.content === "1") msg.reply(`เรียกทำควยไร`);
-  
+
   if (msg.content === "$btc") {
     cryptoPrice
       .getBTC()
