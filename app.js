@@ -1,130 +1,76 @@
 require("dotenv").config();
 
-const separator = require("number-separator");
-const { Client, Intents } = require("discord.js");
+const fs = require("fs");
+const { REST } = require("@discordjs/rest");
+const { Routes } = require("discord-api-types/v9");
+const { Client, Intents, Collection } = require("discord.js");
 const Discord = require("discord.js");
 
 const keepAlive = require("./server");
-const cryptoPrice = require("./services/fetch");
 
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS],
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
-client.on("ready", () => {
+const commandFiles = fs
+  .readdirSync("./commands")
+  .filter((file) => file.endsWith(".js"));
+
+const commands = [];
+
+client.commands = new Collection();
+
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  commands.push(command.data.toJSON());
+  client.commands.set(command.data.name, command);
+}
+
+client.once("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+
+  const CLIENT_ID = client.user.id;
+  const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
+
+  (async () => {
+    try {
+      if (process.env.ENV === "production") {
+        await rest.put(Routes.applicationCommand(CLIENT_ID), {
+          body: commands,
+        });
+        console.log("Successfully registered commands globally");
+      } else {
+        await rest.put(
+          Routes.applicationGuildCommands(CLIENT_ID, process.env.GUILD_ID),
+          { body: commands }
+        );
+        console.log("Successfully registered commands locally");
+      }
+    } catch (err) {
+      if (err) console.error(err);
+    }
+  })();
+
+  client.on("interactionCreate", async (interaction) => {
+    if (!interaction.isCommand()) return;
+
+    const command = client.commands.get(interaction.commandName);
+
+    if (!command) return;
+
+    try {
+      await command.execute(interaction);
+    } catch (err) {
+      if (err) console.error(err);
+
+      await interaction.reply({
+        content: "An error occured while executing that command",
+        ephemeral: true,
+      });
+    }
+  });
+
   client.user.setActivity("Visual Studio Code", { type: "PLAYING" });
-});
-
-client.on("messageCreate", (msg) => {
-  if (msg.author.bot) return;
-
-  // if (msg.content === "$help") {
-  //   const embed = new Discord.MessageEmbed().setColor("RANDOM").setDescription(
-  //     "**$help** - Display the help menu\n\n\
-  //   ***Cryptocurrency Price***\n\
-  //   **$btc** - Bitcoin Price\n\
-  //   **$eth** - Ethereum Price\n\
-  //   **$bnb** - Binance Coin Price\n\
-  //   **$kub** - Bitkub Coin Price\n\
-  //   **$ccar** - CryptoCars Price\n\
-  //   **$lumi** - LUMI Price"
-  //   )
-  //   return msg.reply({
-  //     content: embed,
-  //     ephemeral: true}
-  //   );
-  // }
-
-  if (msg.mentions.members.size) {
-    if (msg.mentions.users.first().id === "908733995326533652")
-      return msg.reply(`เรียกทำควยไร`);
-
-    if (msg.mentions.users.first().id === "266578949104992257")
-      return msg.reply(`${msg.mentions.members.first()} พั้นช์ของโอ้น`);
-
-    if (msg.mentions.users.first().id === "426748155900461076")
-      return msg.reply(`${msg.mentions.members.first()} เบนซีผู้กล้าขี้ระแวง`);
-
-    if (msg.mentions.users.first().id === "304114263927029760")
-      return msg.reply(`${msg.mentions.members.first()} พี่ก้องของน้องแอ๋ว`);
-
-    if (msg.mentions.users.first().id === "603230504703229962")
-      return msg.reply(`${msg.mentions.members.first()} วันๆหาแต่หี`);
-  }
-  if (msg.content === "1") msg.reply(`เรียกทำควยไร`);
-
-  if (msg.content === "$btc") {
-    cryptoPrice
-      .getBTC()
-      .then((price) =>
-        msg.reply(
-          `USD/BTC : ${separator(price[0], ",", "")} USD\nTHB/BTC : ${separator(
-            price[1],
-            ",",
-            ""
-          )} THB`
-        )
-      );
-  }
-
-  if (msg.content === "$eth") {
-    cryptoPrice
-      .getETH()
-      .then((price) =>
-        msg.reply(
-          `USD/ETH : ${separator(price[0], ",", "")} USD\nTHB/ETH : ${separator(
-            price[1],
-            ",",
-            ""
-          )} THB`
-        )
-      );
-  }
-
-  if (msg.content === "$bnb") {
-    cryptoPrice
-      .getBNB()
-      .then((price) =>
-        msg.reply(
-          `USD/BNB : ${separator(price[0], ",", "")} USD\nTHB/BNB : ${separator(
-            price[1],
-            ",",
-            ""
-          )} THB`
-        )
-      );
-  }
-
-  if (msg.content === "$kub") {
-    cryptoPrice.getKUB().then((kub) => msg.reply(`THB/KUB : ${kub} THB`));
-  }
-
-  if (msg.content === "$ccar") {
-    cryptoPrice
-      .getCCAR()
-      .then((price) =>
-        msg.reply(
-          `USD/CCAR : ${separator(
-            price[0],
-            ",",
-            ""
-          )} USD\nTHB/CCAR : ${separator(price[1], ",", "")} THB`
-        )
-      );
-  }
-
-  if (msg.content === "$lumi") {
-    cryptoPrice
-      .getLUMI()
-      .then((price) =>
-        msg.reply(
-          `USD/LUMI : ${price[0].toFixed(6)} USD\nTHB/LUMI : ${price[1].toFixed(
-            2
-          )} THB`
-        )
-      );
-  }
 });
 
 keepAlive();
