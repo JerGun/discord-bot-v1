@@ -14,7 +14,7 @@ module.exports = {
     date.setHours( date.getHours() + 7 );
     let today = date.getDay();
 
-    console.log(today);
+    console.log(`Date: ${date}, ${today}`);
 
     if (interaction.options.getString("day") === "tomorrow") {
       today += 1;
