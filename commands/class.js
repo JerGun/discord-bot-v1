@@ -10,8 +10,9 @@ module.exports = {
     ),
   async execute(interaction) {
     let embed;
-    let dateString = new Date().toLocaleString("en-TH");
-    let today = new Date(dateString).getDay();
+    let date = new Date();
+    date.setHours( date.getHours() + 7 );
+    let today = date.getDay();
 
     console.log(today);
 
