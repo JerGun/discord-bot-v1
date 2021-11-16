@@ -11,6 +11,7 @@ module.exports = {
   async execute(interaction) {
     let today = new Date().getDay();
     let embed;
+    console.log(today);
     if (interaction.options.getString("day") === "tomorrow") {
       today += 1;
     }
