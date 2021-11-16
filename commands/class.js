@@ -9,7 +9,7 @@ module.exports = {
       option.setName("day").setDescription("Day of the Week or Tomorrow")
     ),
   async execute(interaction) {
-    let today = new Date().getDay();
+    let today = new Date().toLocaleString("th-TH").getDay();
     let embed;
     console.log(today);
     if (interaction.options.getString("day") === "tomorrow") {
