@@ -14,6 +14,9 @@ module.exports = {
     if (interaction.options.getString("day") === "tomorrow") {
       today += 1;
     }
+    if (interaction.options.getString("day") === "yesterday") {
+      today -= 1;
+    }
     if (today === 0 || interaction.options.getString("day") === "su") {
       embed = new MessageEmbed()
         .setColor("RANDOM")
