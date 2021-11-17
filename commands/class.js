@@ -11,7 +11,7 @@ module.exports = {
   async execute(interaction) {
     let embed;
     let date = new Date();
-    date.setHours( date.getHours() + 7 );
+    date.setHours(date.getHours() + 7);
     let today = date.getDay();
 
     console.log(`Date: ${date}, ${today}`);
@@ -74,13 +74,17 @@ module.exports = {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Thursday Class!")
-        .addFields({
-          name: "227474[1] Software Evolution and Maintenance",
-          value: "⏲️ 13.00 - 16.00\n🧑‍🏫 ผศ.ดวิษ แสนโภชน์",
-          name: "227321[2] Software Engineering Project I",
-          value:
-            "⏲️ 16.00 - 19.00\n\n🧑‍🏫 นายเชาวน์ ปอแก้ว\n🧑‍🏫 นายณัฐพล หาญสมุทร\n🧑‍🏫 ผศ.ดร.ธีระยุทธ ทองเครือ\n🧑‍🏫 ผศ.ดร.บวรศักดิ์ ศรีสังสิทธิสันติ\n🧑‍🏫 ผศ.ดวิษ แสนโภชน์",
-        })
+        .addFields(
+          {
+            name: "227474[1] Software Evolution and Maintenance",
+            value: "⏲️ 13.00 - 16.00\n🧑‍🏫 ผศ.ดวิษ แสนโภชน์",
+          },
+          {
+            name: "227321[2] Software Engineering Project I",
+            value:
+              "⏲️ 16.00 - 19.00\n\n🧑‍🏫 นายเชาวน์ ปอแก้ว\n🧑‍🏫 นายณัฐพล หาญสมุทร\n🧑‍🏫 ผศ.ดร.ธีระยุทธ ทองเครือ\n🧑‍🏫 ผศ.ดร.บวรศักดิ์ ศรีสังสิทธิสันติ\n🧑‍🏫 ผศ.ดวิษ แสนโภชน์",
+          }
+        )
         .setTimestamp();
     }
     if (today === 5 || interaction.options.getString("day") === "fr") {
