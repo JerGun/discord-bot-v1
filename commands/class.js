@@ -20,20 +20,28 @@ module.exports = {
     if (interaction.options.getString("day") === "tomorrow") {
       today += 1;
       if (today == 7) today = 0
-      console.log(today);
     } 
     if (interaction.options.getString("day") === "yesterday") {
       today -= 1;
-      console.log(today);
     }
-    if (interaction.options.getString("day") === "su" || today === 0) {
+    if (interaction.options.getString("day") === "su") today = 0
+    if (interaction.options.getString("day") === "mo") today = 1
+    if (interaction.options.getString("day") === "tu") today = 2
+    if (interaction.options.getString("day") === "we") today = 3
+    if (interaction.options.getString("day") === "th") today = 4
+    if (interaction.options.getString("day") === "fr") today = 5
+    if (interaction.options.getString("day") === "sa") today = 6
+
+    console.log(today);
+
+    if (today === 0) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Sunday Class!")
         .setDescription("No class today")
         .setTimestamp();
     }
-    if (interaction.options.getString("day") === "mo" || today === 1) {
+    if (today === 1) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Monday Class!")
@@ -50,7 +58,7 @@ module.exports = {
         )
         .setTimestamp();
     }
-    if (interaction.options.getString("day") === "tu" || today === 2) {
+    if (today === 2) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Tuesday Class!")
@@ -71,7 +79,7 @@ module.exports = {
         )
         .setTimestamp();
     }
-    if (interaction.options.getString("day") === "we" || today === 3) {
+    if (today === 3) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Wednesday Class!")
@@ -81,7 +89,7 @@ module.exports = {
         )
         .setTimestamp();
     }
-    if (interaction.options.getString("day") === "th" || today === 4) {
+    if (today === 4) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Thursday Class!")
@@ -91,14 +99,14 @@ module.exports = {
         })
         .setTimestamp();
     }
-    if (interaction.options.getString("day") === "fr" || today === 5) {
+    if (today === 5) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Friday Class!")
         .setDescription("No class today")
         .setTimestamp();
     }
-    if (interaction.options.getString("day") === "sa" || today === 6) {
+    if (today === 6) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Saturday Class!")
