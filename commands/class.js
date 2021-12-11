@@ -21,9 +21,7 @@ module.exports = {
       today += 1;
       if (today == 7) today = 0
     } 
-    if (interaction.options.getString("day") === "yesterday") {
-      today -= 1;
-    }
+    if (interaction.options.getString("day") === "yesterday") today -= 1;
     if (interaction.options.getString("day") === "su") today = 0
     if (interaction.options.getString("day") === "mo") today = 1
     if (interaction.options.getString("day") === "tu") today = 2
@@ -113,7 +111,7 @@ module.exports = {
         .setDescription("No class today")
         .setTimestamp();
     }
-    await interaction.deferReply();
-    await interaction.editReply({ embeds: [embed], ephemeral: true });
+    await interaction.deferReply({ ephemeral: true });
+    interaction.editReply({ embeds: [embed] });
   },
 };
