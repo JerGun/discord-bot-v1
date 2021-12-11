@@ -15,12 +15,16 @@ module.exports = {
     let today = date.getDay();
 
     console.log(`Date: ${date}, ${today}`);
+    console.log(interaction.options.getString("day"));
 
     if (interaction.options.getString("day") === "tomorrow") {
       today += 1;
-    }
+      if (today == 7) today = 0
+      console.log(today);
+    } 
     if (interaction.options.getString("day") === "yesterday") {
       today -= 1;
+      console.log(today);
     }
     if (today === 0 || interaction.options.getString("day") === "su") {
       embed = new MessageEmbed()
@@ -42,7 +46,7 @@ module.exports = {
           {
             name: "225351[2] Computer and Network Security",
             value: "⏲️ 15.00 - 17.00\n🧑‍🏫 ดร.ธนภณ ถิรดาธนภัทรเดชา",
-          },
+          }
         )
         .setTimestamp();
     }
@@ -81,12 +85,10 @@ module.exports = {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Thursday Class!")
-        .addFields(
-          {
-            name: "227474[1] Software Evolution and Maintenance",
-            value: "⏲️ 13.00 - 16.00\n🧑‍🏫 ผศ.ดวิษ แสนโภชน์",
-          },
-        )
+        .addFields({
+          name: "227474[1] Software Evolution and Maintenance",
+          value: "⏲️ 13.00 - 16.00\n🧑‍🏫 ผศ.ดวิษ แสนโภชน์",
+        })
         .setTimestamp();
     }
     if (today === 5 || interaction.options.getString("day") === "fr") {
@@ -103,6 +105,7 @@ module.exports = {
         .setDescription("No class today")
         .setTimestamp();
     }
-    await interaction.reply({ embeds: [embed], ephemeral: true });
+    await interaction.deferReply();
+    await interaction.editReply({ embeds: [embed], ephemeral: true });
   },
 };

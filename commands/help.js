@@ -27,7 +27,7 @@ module.exports = {
       **/lumi** - LUMI Price",
         }
       );
-    await interaction.deferReply({ ephemeral: true });
-    interaction.editReply({ embeds: [embed] });
+    await interaction.deferReply();
+    interaction.editReply({ embeds: [embed], ephemeral: true });
   },
 };
