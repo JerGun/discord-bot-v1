@@ -141,14 +141,10 @@ async function getLUMI() {
 
 function getTHB() {
   return axios
-    .get("https://www.xe.com/api/protected/midmarket-converter/", {
-      headers: {
-        authorization:
-          "Basic bG9kZXN0YXI6b09EZndjbENXUGtLVUIyeGlhdmdPS25mQmp4N01LMVI=",
-      },
+    .get("https://query1.finance.yahoo.com/v8/finance/chart/USDTHB=X?region=US&lang=en-US&includePrePost=false&interval=2m&useYfid=true&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance", {
     })
     .then((res) => {
-      return res.data["rates"]["THB"];
+      return res.data["chart"]["result"][0]["meta"]["regularMarketPrice"];
     });
 }
 
