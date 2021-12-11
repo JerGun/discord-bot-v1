@@ -26,14 +26,14 @@ module.exports = {
       today -= 1;
       console.log(today);
     }
-    if (today === 0 || interaction.options.getString("day") === "su") {
+    if (interaction.options.getString("day") === "su" || today === 0) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Sunday Class!")
         .setDescription("No class today")
         .setTimestamp();
     }
-    if (today === 1 || interaction.options.getString("day") === "mo") {
+    if (interaction.options.getString("day") === "mo" || today === 1) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Monday Class!")
@@ -50,7 +50,7 @@ module.exports = {
         )
         .setTimestamp();
     }
-    if (today === 2 || interaction.options.getString("day") === "tu") {
+    if (interaction.options.getString("day") === "tu" || today === 2) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Tuesday Class!")
@@ -71,7 +71,7 @@ module.exports = {
         )
         .setTimestamp();
     }
-    if (today === 3 || interaction.options.getString("day") === "we") {
+    if (interaction.options.getString("day") === "we" || today === 3) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Wednesday Class!")
@@ -81,7 +81,7 @@ module.exports = {
         )
         .setTimestamp();
     }
-    if (today === 4 || interaction.options.getString("day") === "th") {
+    if (interaction.options.getString("day") === "th" || today === 4) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Thursday Class!")
@@ -91,14 +91,14 @@ module.exports = {
         })
         .setTimestamp();
     }
-    if (today === 5 || interaction.options.getString("day") === "fr") {
+    if (interaction.options.getString("day") === "fr" || today === 5) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Friday Class!")
         .setDescription("No class today")
         .setTimestamp();
     }
-    if (today === 6 || interaction.options.getString("day") === "sa") {
+    if (interaction.options.getString("day") === "sa" || today === 6) {
       embed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Saturday Class!")
