@@ -4,27 +4,17 @@ async function getBTC() {
   const price = [];
   await axios
     .get(
-      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=1",
-      {
-        headers: {
-          "X-CMC_PRO_API_KEY": process.env.CMC_KEY,
-        },
-      }
+      "https://api.coingecko.com/api/v3/coins/bitcoin",
     )
     .then((res) => {
-      price.push(res.data["data"]["1"]["quote"]["USD"]["price"].toFixed(6));
+      price.push(res.data["market_data"]["current_price"]["usd"].toFixed(2));
     });
   await axios
     .get(
-      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=1&convert=THB",
-      {
-        headers: {
-          "X-CMC_PRO_API_KEY": process.env.CMC_KEY,
-        },
-      }
+      "https://api.coingecko.com/api/v3/coins/bitcoin",
     )
     .then((res) => {
-      price.push(res.data["data"]["1"]["quote"]["THB"]["price"].toFixed(2));
+      price.push(res.data["market_data"]["current_price"]["thb"].toFixed(2));
     });
   return price;
 }
@@ -33,27 +23,17 @@ async function getETH() {
   const price = [];
   await axios
     .get(
-      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=1027",
-      {
-        headers: {
-          "X-CMC_PRO_API_KEY": process.env.CMC_KEY,
-        },
-      }
+      "https://api.coingecko.com/api/v3/coins/ethereum",
     )
     .then((res) => {
-      price.push(res.data["data"]["1027"]["quote"]["USD"]["price"].toFixed(6));
+      price.push(res.data["market_data"]["current_price"]["usd"].toFixed(2));
     });
   await axios
     .get(
-      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=1027&convert=THB",
-      {
-        headers: {
-          "X-CMC_PRO_API_KEY": process.env.CMC_KEY,
-        },
-      }
+      "https://api.coingecko.com/api/v3/coins/ethereum",
     )
     .then((res) => {
-      price.push(res.data["data"]["1027"]["quote"]["THB"]["price"].toFixed(2));
+      price.push(res.data["market_data"]["current_price"]["thb"].toFixed(2));
     });
   return price;
 }
@@ -62,27 +42,17 @@ async function getBNB() {
   const price = [];
   await axios
     .get(
-      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=1839",
-      {
-        headers: {
-          "X-CMC_PRO_API_KEY": process.env.CMC_KEY,
-        },
-      }
+      "https://api.coingecko.com/api/v3/coins/binancecoin",
     )
     .then((res) => {
-      price.push(res.data["data"]["1839"]["quote"]["USD"]["price"].toFixed(6));
+      price.push(res.data["market_data"]["current_price"]["usd"].toFixed(2));
     });
   await axios
     .get(
-      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=1839&convert=THB",
-      {
-        headers: {
-          "X-CMC_PRO_API_KEY": process.env.CMC_KEY,
-        },
-      }
+      "https://api.coingecko.com/api/v3/coins/binancecoin",
     )
     .then((res) => {
-      price.push(res.data["data"]["1839"]["quote"]["THB"]["price"].toFixed(2));
+      price.push(res.data["market_data"]["current_price"]["thb"].toFixed(2));
     });
   return price;
 }
@@ -99,28 +69,18 @@ async function getCCAR() {
   const price = [];
   await axios
     .get(
-      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=11502",
-      {
-        headers: {
-          "X-CMC_PRO_API_KEY": process.env.CMC_KEY,
-        },
-      }
+      "https://api.coingecko.com/api/v3/coins/cryptocars",
     )
     .then((res) => {
       // console.log("API call response:", res.data["data"]["11502"]["quote"]["USD"]["price"].toFixed(6));
-      price.push(res.data["data"]["11502"]["quote"]["USD"]["price"].toFixed(6));
+      price.push(res.data["market_data"]["current_price"]["usd"].toFixed(6));
     });
   await axios
     .get(
-      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=11502&convert=THB",
-      {
-        headers: {
-          "X-CMC_PRO_API_KEY": process.env.CMC_KEY,
-        },
-      }
+      "https://api.coingecko.com/api/v3/coins/cryptocars",
     )
     .then((res) => {
-      price.push(res.data["data"]["11502"]["quote"]["THB"]["price"].toFixed(2));
+      price.push(res.data["market_data"]["current_price"]["thb"].toFixed(2));
     });
   return price;
 }
