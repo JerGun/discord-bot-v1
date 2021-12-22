@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("class")
-    .setDescription("Show today's class")
+    .setDescription("Shows today's class")
     .addStringOption((option) =>
       option.setName("day").setDescription("Day of the Week or Tomorrow")
     ),
