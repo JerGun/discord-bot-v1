@@ -85,6 +85,66 @@ async function getCCAR() {
   return price;
 }
 
+async function getCPAN() {
+  const price = [];
+  await axios
+    .get(
+      "https://api.coingecko.com/api/v3/coins/cryptoplanes",
+    )
+    .then((res) => {
+      // console.log("API call response:", res.data["data"]["11502"]["quote"]["USD"]["price"].toFixed(6));
+      price.push(res.data["market_data"]["current_price"]["usd"].toFixed(6));
+    });
+  await axios
+    .get(
+      "https://api.coingecko.com/api/v3/coins/cryptoplanes",
+    )
+    .then((res) => {
+      price.push(res.data["market_data"]["current_price"]["thb"].toFixed(2));
+    });
+  return price;
+}
+
+async function getCGAR() {
+  const price = [];
+  await axios
+    .get(
+      "https://api.coingecko.com/api/v3/coins/cryptoguards",
+    )
+    .then((res) => {
+      // console.log("API call response:", res.data["data"]["11502"]["quote"]["USD"]["price"].toFixed(6));
+      price.push(res.data["market_data"]["current_price"]["usd"].toFixed(6));
+    });
+  await axios
+    .get(
+      "https://api.coingecko.com/api/v3/coins/cryptoguards",
+    )
+    .then((res) => {
+      price.push(res.data["market_data"]["current_price"]["thb"].toFixed(2));
+    });
+  return price;
+}
+
+async function getBCOIN() {
+  const price = [];
+  await axios
+    .get(
+      "https://api.coingecko.com/api/v3/coins/bomber-coin",
+    )
+    .then((res) => {
+      // console.log("API call response:", res.data["data"]["11502"]["quote"]["USD"]["price"].toFixed(6));
+      price.push(res.data["market_data"]["current_price"]["usd"].toFixed(6));
+    });
+  await axios
+    .get(
+      "https://api.coingecko.com/api/v3/coins/bomber-coin",
+    )
+    .then((res) => {
+      price.push(res.data["market_data"]["current_price"]["thb"].toFixed(2));
+    });
+  return price;
+}
+
 async function getLUMI() {
   const price = [];
   const thb = await getTHB();
@@ -108,4 +168,4 @@ function getTHB() {
     });
 }
 
-module.exports = { getBTC, getETH, getBNB, getKUB, getCCAR, getLUMI, getTHB };
+module.exports = { getBTC, getETH, getBNB, getKUB, getCCAR, getCPAN, getCGAR, getBCOIN, getLUMI, getTHB };
