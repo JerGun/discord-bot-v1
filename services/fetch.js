@@ -2,65 +2,72 @@ const separator = require("number-separator");
 const axios = require("axios");
 
 async function getAll() {
-  const data = {
-    btc: {
+  const data = [
+    {
+      id: "btc",
       symbol: "BTC",
       name: "Bitcoin",
       price: { usd: 0, thb: 0 },
       change: 0,
     },
-    eth: {
+    {
+      id: "eth",
       symbol: "ETH",
       name: "Ethereum",
       price: { usd: 0, thb: 0 },
       change: 0,
     },
-    bnb: {
+    {
+      id: "bnb",
       symbol: "BNB",
       name: "Binance Coin",
       price: { usd: 0, thb: 0 },
       change: 0,
     },
-    kub: { symbol: "KUB", name: "Bitkub", price: { thb: 0 }, change: 0 },
-    ccar: {
+    { id: "kub", symbol: "KUB", name: "Bitkub", price: { thb: 0 }, change: 0 },
+    {
+      id: "ccar",
       symbol: "CCAR",
       name: "CryptoCars",
       price: { usd: 0, thb: 0 },
       change: 0,
     },
-    cpan: {
+    {
+      id: "cpan",
       symbol: "CPAN",
       name: "CryptoPlanes",
       price: { usd: 0, thb: 0 },
       change: 0,
     },
-    cgar: {
+    {
+      id: "cgar",
       symbol: "CGAR",
       name: "CryptoGuards",
       price: { usd: 0, thb: 0 },
       change: 0,
     },
-    bcoin: {
+    {
+      id: "bcoin",
       symbol: "BCOIN",
       name: "Bomber Coin",
       price: { usd: 0, thb: 0 },
       change: 0,
     },
-  };
+  ];
   await axios
     .get("https://api.coingecko.com/api/v3/coins/bitcoin")
     .then((res) => {
-      data.btc.price.usd = separator(
+      data[0].price.usd = separator(
         res.data["market_data"]["current_price"]["usd"].toFixed(2),
         ",",
         ""
       );
-      data.btc.price.thb = separator(
+      data[0].price.thb = separator(
         res.data["market_data"]["current_price"]["thb"].toFixed(2),
         ",",
         ""
       );
-      data.btc.change =
+      data[0].change =
         res.data["market_data"]["price_change_percentage_24h_in_currency"][
           "thb"
         ].toFixed(2);
@@ -69,17 +76,17 @@ async function getAll() {
   await axios
     .get("https://api.coingecko.com/api/v3/coins/ethereum")
     .then((res) => {
-      data.eth.price.usd = separator(
+      data[1].price.usd = separator(
         res.data["market_data"]["current_price"]["usd"].toFixed(2),
         ",",
         ""
       );
-      data.eth.price.thb = separator(
+      data[1].price.thb = separator(
         res.data["market_data"]["current_price"]["thb"].toFixed(2),
         ",",
         ""
       );
-      data.eth.change =
+      data[1].change =
         res.data["market_data"]["price_change_percentage_24h_in_currency"][
           "thb"
         ].toFixed(2);
@@ -88,17 +95,17 @@ async function getAll() {
   await axios
     .get("https://api.coingecko.com/api/v3/coins/binancecoin")
     .then((res) => {
-      data.bnb.price.usd = separator(
+      data[2].price.usd = separator(
         res.data["market_data"]["current_price"]["usd"].toFixed(2),
         ",",
         ""
       );
-      data.bnb.price.thb = separator(
+      data[2].price.thb = separator(
         res.data["market_data"]["current_price"]["thb"].toFixed(2),
         ",",
         ""
       );
-      data.bnb.change =
+      data[2].change =
         res.data["market_data"]["price_change_percentage_24h_in_currency"][
           "thb"
         ].toFixed(2);
@@ -107,28 +114,28 @@ async function getAll() {
   await axios
     .get("https://www.bitkub.com/api/market/information?currency=KUB")
     .then((res) => {
-      data.kub.price.thb = separator(
+      data[3].price.thb = separator(
         res.data["data"]["last"]["thb"].toFixed(2),
         ",",
         ""
       );
-      data.kub.change = String(res.data["data"]["percentage"]);
+      data[3].change = String(res.data["data"]["percentage"]);
     });
 
   await axios
     .get("https://api.coingecko.com/api/v3/coins/cryptocars")
     .then((res) => {
-      data.ccar.price.usd = separator(
+      data[4].price.usd = separator(
         res.data["market_data"]["current_price"]["usd"].toFixed(2),
         ",",
         ""
       );
-      data.ccar.price.thb = separator(
+      data[4].price.thb = separator(
         res.data["market_data"]["current_price"]["thb"].toFixed(2),
         ",",
         ""
       );
-      data.ccar.change =
+      data[4].change =
         res.data["market_data"]["price_change_percentage_24h_in_currency"][
           "thb"
         ].toFixed(2);
@@ -137,17 +144,17 @@ async function getAll() {
   await axios
     .get("https://api.coingecko.com/api/v3/coins/cryptoplanes")
     .then((res) => {
-      data.cpan.price.usd = separator(
+      data[5].price.usd = separator(
         res.data["market_data"]["current_price"]["usd"].toFixed(2),
         ",",
         ""
       );
-      data.cpan.price.thb = separator(
+      data[5].price.thb = separator(
         res.data["market_data"]["current_price"]["thb"].toFixed(2),
         ",",
         ""
       );
-      data.cpan.change =
+      data[5].change =
         res.data["market_data"]["price_change_percentage_24h_in_currency"][
           "thb"
         ].toFixed(2);
@@ -156,17 +163,17 @@ async function getAll() {
   await axios
     .get("https://api.coingecko.com/api/v3/coins/cryptoguards")
     .then((res) => {
-      data.cgar.price.usd = separator(
+      data[6].price.usd = separator(
         res.data["market_data"]["current_price"]["usd"].toFixed(2),
         ",",
         ""
       );
-      data.cgar.price.thb = separator(
+      data[6].price.thb = separator(
         res.data["market_data"]["current_price"]["thb"].toFixed(2),
         ",",
         ""
       );
-      data.cgar.change =
+      data[6].change =
         res.data["market_data"]["price_change_percentage_24h_in_currency"][
           "thb"
         ].toFixed(2);
@@ -175,17 +182,17 @@ async function getAll() {
   await axios
     .get("https://api.coingecko.com/api/v3/coins/bomber-coin")
     .then((res) => {
-      data.bcoin.price.usd = separator(
+      data[7].price.usd = separator(
         res.data["market_data"]["current_price"]["usd"].toFixed(2),
         ",",
         ""
       );
-      data.bcoin.price.thb = separator(
+      data[7].price.thb = separator(
         res.data["market_data"]["current_price"]["thb"].toFixed(2),
         ",",
         ""
       );
-      data.bcoin.change =
+      data[7].change =
         res.data["market_data"]["price_change_percentage_24h_in_currency"][
           "thb"
         ].toFixed(2);
