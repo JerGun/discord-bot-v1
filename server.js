@@ -7,6 +7,19 @@ app.all("/", (req, res) => {
   res.send("JerGun Bot | Cryptocurrency Price Bot is running!");
 });
 
+app.all("/all", (req, res) => {
+  cryptoPrice.getAll().then((data) => res.send(data));
+});
+
+app.all("/btc", (req, res) => {
+  cryptoPrice.getBTC().then((price) =>
+    res.send({
+      USD: separator(price[0], ",", ""),
+      THB: separator(price[1], ",", ""),
+    })
+  );
+});
+
 app.all("/btc", (req, res) => {
   cryptoPrice.getBTC().then((price) =>
     res.send({
