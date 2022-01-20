@@ -60,19 +60,19 @@ async function getAll() {
       change: 0,
     },
     {
+      id: "thb",
+      symbol: "THB",
+      name: "Thai Baht",
+      price: { usd: 0, thb: 1 },
+      change: 0,
+    },
+    {
       id: "usd",
       symbol: "USD",
       name: "United States Dollar",
       price: { usd: 1, thb: 0 },
       change: 0,
     },
-    {
-      id: "thb",
-      symbol: "THB",
-      name: "Thai Baht",
-      price: { usd: 0, thb: 1 },
-      change: 0,
-    }
   ];
   await axios
     .get("https://api.coingecko.com/api/v3/coins/bitcoin")
@@ -232,13 +232,15 @@ async function getAll() {
       {}
     )
     .then((res) => {
-      data[8].price.thb = separator(
-        res.data["chart"]["result"][0]["meta"]["regularMarketPrice"].toFixed(2),
+      data[8].price.usd = separator(
+        (
+          1 / res.data["chart"]["result"][0]["meta"]["regularMarketPrice"]
+        ).toFixed(6),
         ",",
         ""
       );
       data[9].price.thb = separator(
-        (1/res.data["chart"]["result"][0]["meta"]["regularMarketPrice"]).toFixed(6),
+        res.data["chart"]["result"][0]["meta"]["regularMarketPrice"].toFixed(2),
         ",",
         ""
       );
