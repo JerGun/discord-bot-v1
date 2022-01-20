@@ -24,7 +24,13 @@ async function getAll() {
       price: { usd: 0, thb: 0 },
       change: 0,
     },
-    { id: "kub", symbol: "KUB", name: "Bitkub", price: { thb: 0 }, change: 0 },
+    {
+      id: "kub",
+      symbol: "KUB",
+      name: "Bitkub",
+      price: { usd: 0, thb: 0 },
+      change: 0,
+    },
     {
       id: "ccar",
       symbol: "CCAR",
@@ -53,6 +59,20 @@ async function getAll() {
       price: { usd: 0, thb: 0 },
       change: 0,
     },
+    {
+      id: "usd",
+      symbol: "USD",
+      name: "United States Dollar",
+      price: { usd: 1, thb: 0 },
+      change: 0,
+    },
+    {
+      id: "thb",
+      symbol: "THB",
+      name: "Thai Baht",
+      price: { usd: 0, thb: 1 },
+      change: 0,
+    }
   ];
   await axios
     .get("https://api.coingecko.com/api/v3/coins/bitcoin")
@@ -112,14 +132,22 @@ async function getAll() {
     });
 
   await axios
-    .get("https://www.bitkub.com/api/market/information?currency=KUB")
+    .get("https://api.coingecko.com/api/v3/coins/bitkub-coin")
     .then((res) => {
-      data[3].price.thb = separator(
-        res.data["data"]["last"]["thb"].toFixed(2),
+      data[3].price.usd = separator(
+        res.data["market_data"]["current_price"]["usd"].toFixed(2),
         ",",
         ""
       );
-      data[3].change = String(res.data["data"]["percentage"]);
+      data[3].price.thb = separator(
+        res.data["market_data"]["current_price"]["thb"].toFixed(2),
+        ",",
+        ""
+      );
+      data[3].change =
+        res.data["market_data"]["price_change_percentage_24h_in_currency"][
+          "thb"
+        ].toFixed(2);
     });
 
   await axios
@@ -196,6 +224,24 @@ async function getAll() {
         res.data["market_data"]["price_change_percentage_24h_in_currency"][
           "thb"
         ].toFixed(2);
+    });
+
+  await axios
+    .get(
+      "https://query1.finance.yahoo.com/v8/finance/chart/USDTHB=X?region=US&lang=en-US&includePrePost=false&interval=2m&useYfid=true&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance",
+      {}
+    )
+    .then((res) => {
+      data[8].price.thb = separator(
+        res.data["chart"]["result"][0]["meta"]["regularMarketPrice"].toFixed(2),
+        ",",
+        ""
+      );
+      data[9].price.thb = separator(
+        (1/res.data["chart"]["result"][0]["meta"]["regularMarketPrice"]).toFixed(6),
+        ",",
+        ""
+      );
     });
   return data;
 }
