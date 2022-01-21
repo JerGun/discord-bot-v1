@@ -60,17 +60,24 @@ async function getAll() {
       change: 0,
     },
     {
-      id: "thb",
-      symbol: "THB",
-      name: "Thai Baht",
-      price: { usd: 0, thb: '1' },
+      id: "busd",
+      symbol: "BUSD",
+      name: "Binance USD",
+      price: { usd: "1", thb: 0 },
       change: 0,
     },
     {
-      id: "usd",
-      symbol: "USD",
-      name: "United States Dollar",
-      price: { usd: '1', thb: 0 },
+      id: "usdt",
+      symbol: "USDT",
+      name: "Tether",
+      price: { usd: "1", thb: 0 },
+      change: 0,
+    },
+    {
+      id: "thb",
+      symbol: "THB",
+      name: "Thai Baht",
+      price: { usd: 0, thb: "1" },
       change: 0,
     },
   ];
@@ -227,20 +234,53 @@ async function getAll() {
     });
 
   await axios
+    .get("https://api.coingecko.com/api/v3/coins/binance-usd")
+    .then((res) => {
+      data[8].price.usd = separator(
+        res.data["market_data"]["current_price"]["usd"].toFixed(2),
+        ",",
+        ""
+      );
+      data[8].price.thb = separator(
+        res.data["market_data"]["current_price"]["thb"].toFixed(2),
+        ",",
+        ""
+      );
+      data[8].change =
+        res.data["market_data"]["price_change_percentage_24h_in_currency"][
+          "thb"
+        ].toFixed(2);
+    });
+
+  await axios
+    .get("https://api.coingecko.com/api/v3/coins/tether")
+    .then((res) => {
+      data[9].price.usd = separator(
+        res.data["market_data"]["current_price"]["usd"].toFixed(2),
+        ",",
+        ""
+      );
+      data[9].price.thb = separator(
+        res.data["market_data"]["current_price"]["thb"].toFixed(2),
+        ",",
+        ""
+      );
+      data[9].change =
+        res.data["market_data"]["price_change_percentage_24h_in_currency"][
+          "thb"
+        ].toFixed(2);
+    });
+
+  await axios
     .get(
       "https://query1.finance.yahoo.com/v8/finance/chart/USDTHB=X?region=US&lang=en-US&includePrePost=false&interval=2m&useYfid=true&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance",
       {}
     )
     .then((res) => {
-      data[8].price.usd = separator(
+      data[10].price.usd = separator(
         (
           1 / res.data["chart"]["result"][0]["meta"]["regularMarketPrice"]
         ).toFixed(6),
-        ",",
-        ""
-      );
-      data[9].price.thb = separator(
-        res.data["chart"]["result"][0]["meta"]["regularMarketPrice"].toFixed(2),
         ",",
         ""
       );
