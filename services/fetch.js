@@ -63,14 +63,14 @@ async function getAll() {
       id: "thb",
       symbol: "THB",
       name: "Thai Baht",
-      price: { usd: 0, thb: 1 },
+      price: { usd: 0, thb: '1' },
       change: 0,
     },
     {
       id: "usd",
       symbol: "USD",
       name: "United States Dollar",
-      price: { usd: 1, thb: 0 },
+      price: { usd: '1', thb: 0 },
       change: 0,
     },
   ];
