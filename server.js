@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cryptoPrice = require("./services/fetch");
+const Log = require("./services/log");
 const separator = require("number-separator");
 
 app.use(function (req, res, next) {
@@ -25,13 +26,8 @@ app.all("/all", (req, res) => {
   cryptoPrice.getAll().then((data) => res.send(data));
 });
 
-app.all("/btc", (req, res) => {
-  cryptoPrice.getBTC().then((price) =>
-    res.send({
-      USD: separator(price[0], ",", ""),
-      THB: separator(price[1], ",", ""),
-    })
-  );
+app.all("/log", (req, res) => {
+  Log.getIp().then((data) => res.send(data));
 });
 
 app.all("/btc", (req, res) => {
@@ -106,7 +102,7 @@ app.all("/bcoin", (req, res) => {
 });
 
 function keepAlive() {
-  app.listen(process.env.PORT || 3000, () => {
+  app.listen(process.env.PORT || 8000, () => {
     console.log("Server is ready.");
   });
 }
