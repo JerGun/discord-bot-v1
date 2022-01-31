@@ -8,7 +8,11 @@ module.exports = {
   async execute(interaction) {
     cryptoPrice.getKUB().then((price) =>
       interaction.reply({
-        content: `THB/KUB : ${price} THB`,
+        content: `USD/KUB : ${separator(
+          price[0],
+          ",",
+          ""
+        )} USD\nTHB/KUB : ${separator(price[1], ",", "")} THB`,
       })
     );
   },

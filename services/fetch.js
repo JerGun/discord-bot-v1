@@ -321,12 +321,15 @@ async function getBNB() {
   return price;
 }
 
-function getKUB() {
-  return axios
-    .get("https://www.bitkub.com/api/market/information?currency=KUB")
+async function getKUB() {
+  const price = [];
+  await axios
+    .get("https://api.coingecko.com/api/v3/coins/bitkub-coin")
     .then((res) => {
-      return res.data["data"]["last"]["thb"];
+      price.push(res.data["market_data"]["current_price"]["usd"].toFixed(2));
+      price.push(res.data["market_data"]["current_price"]["thb"].toFixed(2));
     });
+  return price;
 }
 
 async function getCCAR() {
@@ -375,7 +378,7 @@ async function getBCOIN() {
 
 async function getLUMI() {
   const price = [];
-  const thb = await getTHB();
+  const thb = await getUSD();
   await axios
     .get(
       "https://api.loremboard.finance/api/v2/charts/info?symbol=0x95013Dcb6A561e6C003AED9C43Fb8B64008aA361-bkc-usd"
@@ -387,7 +390,7 @@ async function getLUMI() {
   return price;
 }
 
-function getTHB() {
+function getUSD() {
   return axios
     .get(
       "https://query1.finance.yahoo.com/v8/finance/chart/USDTHB=X?region=US&lang=en-US&includePrePost=false&interval=2m&useYfid=true&range=1d&corsDomain=finance.yahoo.com&.tsrc=finance",
@@ -409,5 +412,5 @@ module.exports = {
   getCGAR,
   getBCOIN,
   getLUMI,
-  getTHB,
+  getUSD,
 };
