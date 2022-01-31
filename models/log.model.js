@@ -5,6 +5,7 @@ const logSchema = new Schema(
   {
     ip: String,
     city: String,
+    region: String,
     country_name: String,
     continent_name: String,
     flag: String,
