@@ -1,8 +1,31 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const cryptoPrice = require("./services/fetch");
-const Log = require("./services/log");
+const mongoose = require("mongoose");
 const separator = require("number-separator");
+const logController = require("./controllers/log.controller");
+
+mongoose.Promise = global.Promise;
+
+// Connect MongoDB
+mongoose
+  .connect(process.env.MONGO_CLOUD_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(
+    () => {
+      console.log("[Success] : Connected to the database!");
+    },
+    (error) => {
+      console.log("[Failed] : Can't connect to the database!", error);
+      process.exit();
+    }
+  );
+
+app.use(express.json());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -22,12 +45,10 @@ app.all("/", (req, res) => {
   res.send("JerGun Bot | Cryptocurrency Price Bot is running!");
 });
 
+app.post("/log", logController.add);
+
 app.all("/all", (req, res) => {
   cryptoPrice.getAll().then((data) => res.send(data));
-});
-
-app.all("/log", (req, res) => {
-  Log.getIp().then((data) => res.send(data));
 });
 
 app.all("/btc", (req, res) => {
