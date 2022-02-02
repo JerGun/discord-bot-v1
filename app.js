@@ -74,3 +74,7 @@ client.once("ready", () => {
 
 keepAlive();
 client.login(process.env.TOKEN);
+
+module.exports = {
+  client,
+};

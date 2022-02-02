@@ -1,4 +1,7 @@
+require("dotenv").config();
+
 const LogModel = require("../models/log.model");
+const client = require("../app");
 
 exports.add = (req, res) => {
   const payload = req.body;
@@ -9,4 +12,9 @@ exports.add = (req, res) => {
     .catch((e) => {
       res.status(500).send({ message: e.message });
     });
+  client.on("ready", () => {
+    const guild = client.guilds.cache.get(process.env.GUILD_ID);
+    const channel = guild.channels.cache.get(process.env.CHANNEL_ID);
+    channel.send("You message");
+  });
 };
