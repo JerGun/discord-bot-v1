@@ -70,6 +70,13 @@ client.once("ready", () => {
   });
 
   client.user.setActivity("Visual Studio Code", { type: "PLAYING" });
+
+  const guild = client.guilds.cache.get(process.env.GUILD_ID);
+  const channel = guild.channels.cache.get(process.env.CHANNEL_ID);
+
+  exports.message = (embed) => {
+    channel.send({ embeds: [embed] });
+  };
 });
 
 keepAlive();
