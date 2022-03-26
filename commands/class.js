@@ -111,7 +111,7 @@ module.exports = {
         .setDescription("No class today")
         .setTimestamp();
     }
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ ephemeral: false });
     interaction.editReply({ embeds: [embed] });
   },
 };
